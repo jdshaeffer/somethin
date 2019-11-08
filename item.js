@@ -6,4 +6,4 @@ class Item {
     }
 }
 
-let apple = new Item("apple", "it's an apple", "an")
+const apple = new Item("apple", "it's an apple", "an")
