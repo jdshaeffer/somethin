@@ -1,4 +1,4 @@
-let user = new User([], desks)
+let user = new User([], start)
 
 // global commands
 let globals = ["l", "look", "x", "examine", "look around",
@@ -16,12 +16,14 @@ input.addEventListener("keyup", (event) => {
     if(event.key === "Enter") {
 
         if(user.room === start) {
-            desks.visited = true
+            start.visited = true
+            // navigation
             if(x == "n") {
                 enter(library, input, user, response)
             }
+            // defaults
             else if(globals.includes(x) || globals.includes(x.slice(0,5)) || globals.includes(x.slice(0,2))) {
-                printGlobals(x, desks, response, input, user)
+                printGlobals(x, user.room, response, input, user)
                 input.value = ""
             }
             else if(user.room.walls.includes(x)) {
@@ -34,12 +36,14 @@ input.addEventListener("keyup", (event) => {
             }
         }
         
-        else if(user.room === shelves) {
+        else if(user.room === library) {
+            // navigation
             if(x === "s") {
                 enter(start, input, user, response)
             }
+            // defaults
             else if(globals.includes(x) || globals.includes(x.slice(0,5)) || globals.includes(x.slice(0,2))) {
-                printGlobals(x, shelves, response, input, user)
+                printGlobals(x, user.room, response, input, user)
                 input.value = ""
             }
             else if(user.room.walls.includes(x)) {

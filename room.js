@@ -8,5 +8,5 @@ class Room {
     }
 }
 
-const start = new Room("start", "you're at the very beginning of the game, enjoy", [], ["w","s","e"], false)
-const library = new Room("library", "you're in a library. some bookshelves around you.", [], ["w","n","e"], false)
+let start = new Room("start", "you're at the very beginning of the game, enjoy", [apple], ["w","s","e"], false)
+let library = new Room("library", "you're in a library. some bookshelves around you.", [], ["w","n","e"], false)
