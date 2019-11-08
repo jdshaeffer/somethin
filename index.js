@@ -1,4 +1,5 @@
-let user = new User([], start)
+let user = new User(10, [], start)
+let boxer = new Enemy(10, start, moves)
 
 // global commands
 let globals = ["l", "look", "x", "examine", "look around",

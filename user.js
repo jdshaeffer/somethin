@@ -1,5 +1,6 @@
 class User {
-    constructor(inv, room) {
+    constructor(hp, inv, room) {
+        this.hp = hp
         this.inv = inv
         this.room = room
     }
