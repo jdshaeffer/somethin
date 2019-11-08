@@ -1,0 +1,43 @@
+body {
+    background-color: black;
+}
+
+.total.center {
+    color: white;
+    font-family: ocr-a-std, monospace;
+    font-style: normal;
+    font-weight: 200;
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    padding: 30px;
+}
+
+.response {
+    color: white;
+    font-family: ocr-a-std, monospace;
+    font-style: normal;
+    font-weight: 200;
+    position: relative;
+
+    top: 40%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+input.beginning {
+    text-align: center;
+    background-color: black;
+    border: black;
+    color: #33ff00;
+    font-family: ocr-a-std, monospace;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 100%;
+    min-width: 0;
+    outline: none;
+}
