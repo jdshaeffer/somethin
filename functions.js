@@ -1,4 +1,4 @@
-let printGlobals = (x, room, response, input, user) => {
+const printGlobals = (x, room, response, input, user) => {
     if(x === "l" || x === "look" || x === "x" || x === "examine" || x === "look around") {
         look(room, response, input)
     }
@@ -40,14 +40,17 @@ let printGlobals = (x, room, response, input, user) => {
     }
 }
 
-let look = (room, response, input) => {
+const look = (room, response, input) => {
+    response.innerHTML = room.name
+    response.appendChild(document.createElement("br"))
     if(room.inv.length === 0) {
-        response.innerHTML = room.name
         response.appendChild(document.createElement("br"))
         response.append(room.info)
     }
     else {
-        response.innerHTML = room.info + "<br>"
+        response.appendChild(document.createElement("br"))
+        response.append(room.info)
+        response.appendChild(document.createElement("br"))
         for(let item of room.inv) {
             response.appendChild(document.createTextNode("there is " + item.indef + " " + item.name + " here"))
             response.appendChild(document.createElement("br"))
@@ -56,7 +59,7 @@ let look = (room, response, input) => {
     input.value = ""
 }
 
-let printUserInv = (user) => {
+const printUserInv = (user) => {
     if(user.inv.length === 0) {
         response.innerHTML = "you don't have anything" 
     }
@@ -70,7 +73,7 @@ let printUserInv = (user) => {
     input.value = ""
 }
 
-let take = (thing, roomInv, userInv, response, input) => {
+const take = (thing, roomInv, userInv, response, input) => {
     if(roomInv.length === 0) {
         response.innerHTML = "you can't take that"
     }
@@ -98,7 +101,7 @@ let take = (thing, roomInv, userInv, response, input) => {
     input.value = ""
 }
 
-let drop = (thing, roomInv, userInv, response, input) => {
+const drop = (thing, roomInv, userInv, response, input) => {
     if(userInv.length === 0) {
         response.innerHTML = "you can't drop that"
     }
@@ -127,8 +130,9 @@ let drop = (thing, roomInv, userInv, response, input) => {
 }
 
 // function called when player moves to another room
-let enter = (room, input, user, response) => {
+const enter = (room, input, user, response) => {
     response.innerHTML = room.name
+    response.appendChild(document.createElement("br"))
     if(!room.visited) { // if first time visiting, print full description automatically
         response.appendChild(document.createElement("br"))
         response.append(room.info)
