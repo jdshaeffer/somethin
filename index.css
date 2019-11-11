@@ -2,6 +2,7 @@ body {
     background-color: black;
 }
 
+
 .total.center {
     color: white;
     font-family: ocr-a-std, monospace;
@@ -13,10 +14,11 @@ body {
     left: 50%;
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    padding: 30px;
+    /* padding: 30px; */
 }
 
 .response {
+    white-space: pre;
     color: white;
     font-family: ocr-a-std, monospace;
     font-style: normal;

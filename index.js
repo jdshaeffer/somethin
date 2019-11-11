@@ -5,6 +5,7 @@ let globals = ["l", "look", "x", "examine", "look around",
     "i", "inventory",
     "take ", "take", "t", "t ",
     "drop ", "drop", "d", "d ",
+    "fight ", "fight",
     "help"]
 
 // game
@@ -22,7 +23,7 @@ input.addEventListener("keyup", (event) => {
                 enter(library, input, user, response)
             }
             // defaults
-            else if(globals.includes(x) || globals.includes(x.slice(0,5)) || globals.includes(x.slice(0,2))) {
+            else if(globals.includes(x) || globals.includes(x.slice(0,5)) || globals.includes(x.slice(0,2)) || globals.includes(x.slice(0,6))) {
                 printGlobals(x, user.room, response, input, user)
                 input.value = ""
             }

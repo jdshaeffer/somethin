@@ -39,6 +39,18 @@ const printGlobals = (x, room, response, input, user) => {
         }
         input.value = ""
     }
+    else if(x === "fight") {
+        if(room.npcs.length === 0) {
+            response.innerHTML = "there's no one here to fight."
+        }
+        else {
+            response.innerHTML = "specify who you want to fight."
+        }
+    }
+    else if(x.slice(0,6) === "fight ") {
+        let enemy = x.slice(6)
+        fight(user, input, response, enemy, room)
+    }
     else if(x === "help") {
         response.innerHTML = "n, s, e, w - move around<br>" +
             "take - take an item<br>" +
@@ -160,4 +172,69 @@ const enter = (room, input, user, response) => {
     }
     user.room = room
     input.value = ""
+}
+
+const userTurn = (user, input, response, enemy) => {
+    response.innerHTML = "+---------------+---------------+<br>"
+    response.append("|  (a) attack   |  (e) examine  |")
+    response.appendChild(document.createElement("br"))
+    response.append("|---------------|---------------|")
+    response.appendChild(document.createElement("br"))
+    response.append("|  (i) item     |  (r) rest     |")
+    response.appendChild(document.createElement("br"))
+    response.append("+---------------+---------------+")
+    return new Promise((resolve, reject) => {
+        input.addEventListener("keyup", (event) => {
+        if(event.key === "Enter") {
+        let x = input.value.toLowerCase()
+        if(x === "a") {
+            console.log('attack')
+            resolve()
+        }
+        else if(x === "e") {
+            console.log('examine')
+            resolve()
+        }
+        else if(x === "i") {
+            console.log('item')
+            resolve()
+        }
+        else if(x === "r") {
+            console.log('rest')
+            resolve()
+        }
+        else {
+            reject('bogus man')
+        }
+    }
+    })
+    })
+}
+
+// sleep via accepted answer in https://stackoverflow.com/questions/951021/what-is-the-javascript-version-of-sleep
+const sleep = (ms) => {
+    return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+async function fight (user, input, response, enemy, room) { // function needs to be async since we're using await inside
+    fighting = false
+    if(room.npcs.length === 0) {
+        response.innerHTML = "there's no one here to fight."
+    }
+    else {
+        for(let baddie of room.npcs) { 
+            if(baddie.name === enemy) {
+                response.innerHTML = "you approach the " + enemy + "..."
+                await sleep(1000)
+                console.log(i)
+                await userTurn(user, input, response, enemy) // function shouldn't move on until userTurn is done
+            }
+            else {
+                response.innerHTML = "they're not here."
+            }
+        }
+    }
+
+    // response.innerHTML = "gimme your name, quick"
+    // input.value = ""
 }
