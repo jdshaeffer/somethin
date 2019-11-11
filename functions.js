@@ -43,16 +43,23 @@ const printGlobals = (x, room, response, input, user) => {
 const look = (room, response, input) => {
     response.innerHTML = room.name
     response.appendChild(document.createElement("br"))
-    if(room.inv.length === 0) {
+    response.appendChild(document.createElement("br"))
+    response.append(room.info)
+    if(room.npcs.length > 0) {
         response.appendChild(document.createElement("br"))
-        response.append(room.info)
+        response.appendChild(document.createElement("br"))
+        for(let enemy of room.npcs) {
+            response.appendChild(document.createTextNode("there is " + enemy.indef + " " + enemy.name + " here."))
+            response.appendChild(document.createElement("br"))
+        }
     }
     else {
-        response.appendChild(document.createElement("br"))
-        response.append(room.info)
+        response.appendChild(document.createElement("br")) // spacing
+    }
+    if(room.inv.length > 0) {
         response.appendChild(document.createElement("br"))
         for(let item of room.inv) {
-            response.appendChild(document.createTextNode("there is " + item.indef + " " + item.name + " here"))
+            response.appendChild(document.createTextNode("there is " + item.indef + " " + item.name + " here."))
             response.appendChild(document.createElement("br"))
         }
     }
@@ -130,13 +137,14 @@ const drop = (thing, roomInv, userInv, response, input) => {
 }
 
 // function called when player moves to another room
-const enter = (room, input, user, response) => {
-    response.innerHTML = room.name
-    response.appendChild(document.createElement("br"))
+const enter = (room, input, user, response) => { 
     if(!room.visited) { // if first time visiting, print full description automatically
-        response.appendChild(document.createElement("br"))
-        response.append(room.info)
+        look(room, response, input)
         room.visited = true
+    }
+    else {
+        response.innerHTML = room.name
+        response.appendChild(document.createElement("br"))
     }
     user.room = room
     input.value = ""
