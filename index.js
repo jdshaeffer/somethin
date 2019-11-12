@@ -10,10 +10,10 @@ let globals = ["l", "look", "x", "examine", "look around",
 
 // game
 let input = document.getElementById("input")
-input.addEventListener("keyup", (event) => {
-    let response = document.getElementById("response")
-    let x = input.value.toLowerCase()
+let response = document.getElementById("response")
 
+input.addEventListener("keyup", (event) => {
+    let x = input.value.toLowerCase()
     if(event.key === "Enter") {
 
         if(user.room === start) {

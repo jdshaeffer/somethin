@@ -185,29 +185,29 @@ const userTurn = (user, input, response, enemy) => {
     response.append("+---------------+---------------+")
     return new Promise((resolve, reject) => {
         input.addEventListener("keyup", (event) => {
-        if(event.key === "Enter") {
-        let x = input.value.toLowerCase()
-        if(x === "a") {
-            console.log('attack')
-            resolve()
-        }
-        else if(x === "e") {
-            console.log('examine')
-            resolve()
-        }
-        else if(x === "i") {
-            console.log('item')
-            resolve()
-        }
-        else if(x === "r") {
-            console.log('rest')
-            resolve()
-        }
-        else {
-            reject('bogus man')
-        }
-    }
-    })
+            let x = input.value.toLowerCase()
+            if(event.key === "Enter") {
+                if(x === "a") {
+                    console.log('attack')
+                    resolve()
+                }
+                else if(x === "e") {
+                    console.log('examine')
+                    resolve()
+                }
+                else if(x === "i") {
+                    console.log('item')
+                    resolve()
+                }
+                else if(x === "r") {
+                    console.log('rest')
+                    resolve()
+                }
+                else {
+                    reject('bogus man')
+                }
+            }
+        })
     })
 }
 
@@ -226,8 +226,8 @@ async function fight (user, input, response, enemy, room) { // function needs to
             if(baddie.name === enemy) {
                 response.innerHTML = "you approach the " + enemy + "..."
                 await sleep(1000)
-                console.log(i)
-                await userTurn(user, input, response, enemy) // function shouldn't move on until userTurn is done
+                await userTurn(user, input, response, enemy) // function won't move on until userTurn resolves
+                console.log('here')
             }
             else {
                 response.innerHTML = "they're not here."
