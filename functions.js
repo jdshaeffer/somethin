@@ -216,6 +216,14 @@ const sleep = (ms) => {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
 
+const test = () => {
+    promises = new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(console.log('promise resolved'))}, 2000)
+        })
+        console.log(promises)
+}
+
 async function fight (user, input, response, enemy, room) { // function needs to be async since we're using await inside
     fighting = false
     if(room.npcs.length === 0) {
@@ -226,6 +234,7 @@ async function fight (user, input, response, enemy, room) { // function needs to
             if(baddie.name === enemy) {
                 response.innerHTML = "you approach the " + enemy + "..."
                 await sleep(1000)
+                test()
                 await userTurn(user, input, response, enemy) // function won't move on until userTurn resolves
                 console.log('here')
             }
